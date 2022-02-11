@@ -1,0 +1,12 @@
+<app-hero-search></app-hero-search>
+<h2>Top Charapter</h2>
+
+<div class="heroes-menu">
+  <a *ngFor="let hero of heroesRecogidos"
+     routerLink="/detail/{{hero.id}}">
+    {{hero.name}}
+    <img class="img-heroes" src="{{hero.path}}.{{hero.extension}}">
+  </a>
+</div>
+
+
