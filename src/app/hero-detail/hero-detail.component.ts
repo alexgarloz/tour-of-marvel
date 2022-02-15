@@ -32,7 +32,6 @@ export class HeroDetailComponent implements OnInit {
     heroesArray.subscribe(heroes => {
       this.heroesRecogido = heroes;
       this.heroesRecogido = this.heroesRecogido.data.results;
-
       for (let heroes in this.heroesRecogido) {
         let heroArray = {
           id: this.heroesRecogido[heroes].id,

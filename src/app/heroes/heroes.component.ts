@@ -1,5 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 import {Hero} from '../hero';
 import {HeroService} from '../hero.service';
 import {PageEvent} from "@angular/material/paginator";
@@ -31,10 +30,10 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    //@todo vaciar array antes de ejecutar la llamada
-    let heroesArray: Observable <Hero[]>;
+    let heroesArray: Observable<Hero[]>;
     heroesArray = this.heroService.getHeroes(this.numeroPag);
     heroesArray.subscribe(heroes => {
+      this.heroesList = [];
       this.heroesRecogido = heroes;
       this.total = this.heroesRecogido.data.total;
       this.heroesRecogido = this.heroesRecogido.data.results;

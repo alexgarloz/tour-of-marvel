@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
 import {Observable, Subject} from 'rxjs';
-
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
@@ -35,6 +33,7 @@ export class HeroSearchComponent implements OnInit {
     );
 
     this.heroes$.subscribe(heroes => {
+      this.heroesRecogidos = [];
       this.heroesRecogido = heroes;
       this.heroesRecogido = this.heroesRecogido.data.results;
       for (let heroes in this.heroesRecogido) {
