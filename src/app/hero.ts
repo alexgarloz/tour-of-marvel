@@ -4,5 +4,4 @@ export interface Hero {
   path: string;
   description: string;
   extension: string;
-
 }

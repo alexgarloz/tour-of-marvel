@@ -8,3 +8,9 @@
   </li>
 </ul>
 
+<mat-paginator [length]="total"
+               [pageSize]="20"
+               (page)="pageEvent = $event; onPaginateChange($event)"
+               aria-label="Select page">
+</mat-paginator>
+

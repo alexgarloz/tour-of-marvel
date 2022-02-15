@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import {Hero} from '../hero';
+import {HeroService} from '../hero.service';
+import {PageEvent} from "@angular/material/paginator";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-heroes',
@@ -12,40 +14,36 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
   heroesList: Hero[] = [];
   heroesRecogido: any;
+  total: number = 0;
+  pageEvent: PageEvent | undefined;
+  numeroPag: string = '';
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService) {
+  }
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
+  onPaginateChange($event: PageEvent) {
+    this.numeroPag = this.pageEvent?.pageIndex + '';
+    this.getHeroes();
+  }
+
   getHeroes(): void {
-    /*
-    this.heroService.getHeroes()
-    .subscribe(heroes => this.heroes = heroes);
-    console.log(this.heroes);
-    */
-    let heroesArray = this.heroService.getMarvelPersonage();
+    //@todo vaciar array antes de ejecutar la llamada
+    let heroesArray: Observable <Hero[]>;
+    heroesArray = this.heroService.getHeroes(this.numeroPag);
     heroesArray.subscribe(heroes => {
       this.heroesRecogido = heroes;
+      this.total = this.heroesRecogido.data.total;
       this.heroesRecogido = this.heroesRecogido.data.results;
       for (let heroes in this.heroesRecogido) {
         let heroArray = {
-          id: this.heroesRecogido[heroes].id, name: this.heroesRecogido[heroes].name,
-          path: this.heroesRecogido[heroes].thumbnail.path, extension: this.heroesRecogido[heroes].thumbnail.extension
+          id: this.heroesRecogido[heroes].id, name: this.heroesRecogido[heroes].name
         }
         this.heroesList.push(<Hero>heroArray)
       }
-      /*
-      this.heroesRecogidos.sort(() => {
-        return Math.random() - 0.8;
-      });
-       */
     });
   }
-
-
-
-
-
 }

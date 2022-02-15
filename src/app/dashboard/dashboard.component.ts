@@ -12,7 +12,6 @@ export class DashboardComponent implements OnInit {
   heroesRecogido: any;
   public name: string = '';
   public heroes: any;
-  private pathHeroes: any;
 
   constructor(private heroService: HeroService) {
   }
@@ -22,8 +21,6 @@ export class DashboardComponent implements OnInit {
   }
 
   getMarvel() {
-    //return this.heroService.getMarvelPersonage().then((data: Hero[]) => this.heroes = data);
-    //return this.heroService.getMarvelPersonage();
     let heroesArray = this.heroService.getMarvelPersonage();
     heroesArray.subscribe(heroes => {
       this.heroesRecogido = heroes;

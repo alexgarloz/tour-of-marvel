@@ -23,9 +23,6 @@ export class HeroSearchComponent implements OnInit {
   constructor(private heroService: HeroService) {
   }
 
-  // Push a search term into the observable stream.
-  private term: string = '';
-
   search(term: string): void {
     this.searchTerms.next(term);
   }
@@ -40,11 +37,9 @@ export class HeroSearchComponent implements OnInit {
     this.heroes$.subscribe(heroes => {
       this.heroesRecogido = heroes;
       this.heroesRecogido = this.heroesRecogido.data.results;
-      //this.pathHeroes = this.heroesRecogidos.thumbnail.path;
       for (let heroes in this.heroesRecogido) {
         let heroArray = {
-          id: this.heroesRecogido[heroes].id, name: this.heroesRecogido[heroes].name,
-          path: this.heroesRecogido[heroes].thumbnail.path, extension: this.heroesRecogido[heroes].thumbnail.extension
+          id: this.heroesRecogido[heroes].id, name: this.heroesRecogido[heroes].name
         }
         this.heroesRecogidos.push(<Hero>heroArray)
       }
