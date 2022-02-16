@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Hero} from '../hero';
 import {HeroService} from '../hero.service';
 import {PageEvent} from "@angular/material/paginator";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-heroes',
@@ -30,8 +29,7 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    let heroesArray: Observable<Hero[]>;
-    heroesArray = this.heroService.getHeroes(this.numeroPag);
+    let heroesArray = this.heroService.getHeroes(this.numeroPag);
     heroesArray.subscribe(heroes => {
       this.heroesList = [];
       this.heroesRecogido = heroes;
